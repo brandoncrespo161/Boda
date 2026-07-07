@@ -35,13 +35,13 @@ const PetalRain = () => {
 // Espíritu Santo desplazado a la izquierda mediante x: -15
 const HolySpiritDove = () => (
   <motion.div 
-    className="absolute z-50 pointer-events-none flex items-center justify-center w-full"
+    className="absolute z-10 pointer-events-none flex items-center justify-center w-full"
     initial={{ y: -90, x: -85, opacity: 0 }}
     animate={{ y: 95, x: -8, opacity: 1 }} 
     transition={{ duration: 5, ease: "easeOut" }}
   >
     <img src="/EspirituSanto_2.png" alt="Espíritu Santo" className="w-24 h-24 md:w-32 md:h-32 object-contain"
-      style={{ filter: "sepia(1) hue-rotate(15deg) saturate(1.8) brightness(1.2)", opacity: 0.95 }}
+      style={{ filter: "sepia(1) hue-rotate(15deg) saturate(1.8) brightness(1.2)", opacity: 0.20 }}
       onError={(e) => { e.target.style.display = 'none'; }}
     />
   </motion.div>
