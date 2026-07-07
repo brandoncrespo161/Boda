@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.font-serif { 
+  font-family: var(--font-cormorant), serif; 
+}
+.font-sans { 
+  font-family: var(--font-montserrat), sans-serif; 
+}
+
+/* Forzamos el fondo global por si Tailwind falla en el body */
+body {
+  background-color: #FAF8F5;
+}
