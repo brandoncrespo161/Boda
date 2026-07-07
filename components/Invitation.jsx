@@ -37,7 +37,7 @@ const HolySpiritDove = () => (
   <motion.div 
     className="absolute z-50 pointer-events-none flex items-center justify-center w-full"
     initial={{ y: -90, x: -85, opacity: 0 }}
-    animate={{ y: 90, x: -8, opacity: 1 }} 
+    animate={{ y: 100, x: -8, opacity: 1 }} 
     transition={{ duration: 5, ease: "easeOut" }}
   >
     <img src="/EspirituSanto_2.png" alt="Espíritu Santo" className="w-24 h-24 md:w-32 md:h-32 object-contain"
