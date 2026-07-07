@@ -1,10 +1,25 @@
 "use client";
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Envelope({ onOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isBurning, setIsBurning] = useState(false);
+  
+  // 1. Estado para guardar el nombre del invitado
+  const [guestName, setGuestName] = useState('Invitado Especial');
+
+  // 2. Efecto para leer la URL cuando carga la página
+  useEffect(() => {
+    // Leemos los parámetros del enlace (lo que va después del signo de interrogación)
+    const params = new URLSearchParams(window.location.search);
+    const nombreEnUrl = params.get('para');
+    
+    // Si hay un nombre en el enlace, actualizamos el sobre
+    if (nombreEnUrl) {
+      setGuestName(nombreEnUrl);
+    }
+  }, []);
 
   const handleOpen = (e) => {
     e.stopPropagation();
@@ -40,7 +55,7 @@ export default function Envelope({ onOpen }) {
           initial={{ rotateX: 0 }}
           animate={isOpen ? { rotateX: 180, zIndex: 0 } : { rotateX: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          style={{ height: '55%' }}
+          style={{ height: '46%' }}
         >
            <div className="absolute inset-0 shadow-md" style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)', backgroundColor: '#D1CBB3' }}>
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="1" className="absolute bottom-6 left-1/2 transform -translate-x-1/2 opacity-60">
@@ -88,9 +103,20 @@ export default function Envelope({ onOpen }) {
            </div>
         </motion.div>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-4 md:pb-6 z-10 pointer-events-none">
-          <span className="font-serif text-lg md:text-2xl italic mb-1" style={{ color: '#4A5D23' }}>Nuestra Boda</span>
-          <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold" style={{ color: '#8b723d' }}>Tocar el sello para abrir</span>
+        {/* 3. El texto dinámico en el frente del sobre */}
+        <div className="absolute bottom-2 md:bottom-4 left-0 w-full flex flex-col items-center justify-end z-10 pointer-events-none">
+          <p className="text-[#8b723d] text-[7px] md:text-[8px] uppercase tracking-[0.3em] font-bold mb-0.5 opacity-90">
+            Para:
+          </p>
+          
+          {/* Nombre usando el dorado oscuro/bronce de tu paleta principal */}
+          <span className="font-serif text-xl md:text-2xl italic mb-1.5 text-center px-4 leading-none text-[#8b723d] drop-shadow-sm">
+            {guestName}
+          </span>
+          
+          <span className="text-[6px] md:text-[7px] uppercase tracking-[0.2em] font-bold opacity-60 text-[#8b723d]">
+            Tocar el sello para abrir
+          </span>
         </div>
       </div>
     </motion.div>
